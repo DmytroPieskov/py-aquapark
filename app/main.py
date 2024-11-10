@@ -9,14 +9,14 @@ class IntegerRange:
     def __set_name__(self, owner: object, name: str) -> None:
         self.protected_name = "_" + name
 
-    def __get__(self, instance: object, owner: type) -> str:
+    def __get__(self, instance: object, owner: type) -> int:
         return getattr(instance, self.protected_name)
 
     def __set__(self, instance: object, value: int) -> None:
         if not isinstance(value, int):
-            raise TypeError
+            raise TypeError('Value must be an integer')
         if not (self.min_amount <= value <= self.max_amount):
-            raise ValueError
+            raise ValueError(f'Value must be between {self.min_amount} and {self.max_amount}')
         setattr(instance, self.protected_name, value)
 
 
@@ -65,7 +65,3 @@ class Slide:
             return True
         except (ValueError, TypeError):
             return False
-
-
-Vasia = Visitor("Vasia", age=35, weight=150, height=120)
-print(Vasia)
