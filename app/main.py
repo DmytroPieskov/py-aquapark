@@ -40,11 +40,17 @@ class ChildrenSlideLimitationValidator(SlideLimitationValidator):
     height = IntegerRange(min_amount=80, max_amount=120)
     weight = IntegerRange(min_amount=20, max_amount=50)
 
+    def __init__(self, age: int, weight: int, height: int) -> None:
+        super().__init__(age, weight, height)
+
 
 class AdultSlideLimitationValidator(SlideLimitationValidator):
     age = IntegerRange(min_amount=14, max_amount=60)
     height = IntegerRange(min_amount=120, max_amount=220)
     weight = IntegerRange(min_amount=50, max_amount=120)
+
+    def __init__(self, age: int, weight: int, height: int) -> None:
+        super().__init__(age, weight, height)
 
 
 class Slide:
@@ -59,3 +65,7 @@ class Slide:
             return True
         except (ValueError, TypeError):
             return False
+
+
+Vasia = Visitor("Vasia", age=35, weight=150, height=120)
+print(Vasia)
